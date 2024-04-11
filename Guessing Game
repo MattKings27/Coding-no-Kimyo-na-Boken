@@ -1,0 +1,34 @@
+# Boas vindas e lista para armazenagem de tentativas
+print(welcome)
+guesses = [0]
+import random
+num = random.randint(1,100)
+# Loop do jogo de adivinhação
+while True:
+
+# Input das tentativas     
+    guess = int(input("I'm thinking on a number from 1 to 100 \n Try to guess it!"))
+# Caso fora dos limites
+    if guess < 1 or guess > 100:
+        print('This number is not between 1 and 100, please select another number you monkey!')
+        continue
+    
+# Caso acerte corretamente com o número de tentativas
+    if guess == num:
+        print(f'CONGRATULATIONS! you guessed the number! and it took you {len(guesses)} tries!')
+        break
+
+# Caso erre e continue, adicionar tentativas à lista
+    guesses.append(guess)
+
+    if guesses[-2]:
+        if abs(num-guess) < abs(num-guesses[-2]):
+         print('OH MY GOD! You are getting WARMER!')
+        else:
+         print('OH NO! You are getting COLDER!')
+
+    else:
+        if abs(num-guess) <= 10:
+         print("HOLY SHIT! You are WARM!")
+        else:
+         print("OH NO! You are COLD!")
