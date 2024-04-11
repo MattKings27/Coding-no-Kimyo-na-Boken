@@ -1,8 +1,20 @@
+welcome = """
+Welcome to the Joseph Joeastar's number guessing challenge!
+'Hermito Purple' will think of a number
+Try to guess that number and if you are at least 10 numbers close,
+I'll tell you are WARM, and if not, i'll will tell you are COLD
+
+First of all, select a number:
+
+"""
+
 # Boas vindas e lista para armazenagem de tentativas
+
 print(welcome)
 guesses = [0]
 import random
 num = random.randint(1,100)
+
 # Loop do jogo de adivinhação
 while True:
 
@@ -15,7 +27,7 @@ while True:
     
 # Caso acerte corretamente com o número de tentativas
     if guess == num:
-        print(f'HORY SHITAA! you guessed the number! and it took you {len(guesses)} tries!')
+        print(f'HOLY SHITAA! you guessed the number! and it took you {len(guesses)} tries!')
         break
 
 # Caso erre e continue, adicionar tentativas à lista
