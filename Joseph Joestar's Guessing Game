@@ -15,7 +15,7 @@ while True:
     
 # Caso acerte corretamente com o número de tentativas
     if guess == num:
-        print(f'CONGRATULATIONS! you guessed the number! and it took you {len(guesses)} tries!')
+        print(f'HORY SHITAA! you guessed the number! and it took you {len(guesses)} tries!')
         break
 
 # Caso erre e continue, adicionar tentativas à lista
