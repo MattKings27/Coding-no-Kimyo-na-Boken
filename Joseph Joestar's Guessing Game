@@ -19,7 +19,7 @@ num = random.randint(1,100)
 while True:
 
 # Input das tentativas     
-    guess = int(input("I'm thinking on a number from 1 to 100 \n Try to guess it!"))
+    guess = int(input("I'm thinking on a number from 1 to 100 \n Try to guess it! "))
 # Caso fora dos limites
     if guess < 1 or guess > 100:
         print('This number is not between 1 and 100, please select another number you monkey!')
