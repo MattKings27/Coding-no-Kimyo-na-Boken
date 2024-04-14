@@ -12,19 +12,19 @@ Currently, I am responsible for control, budgeting, forecasting, and cost manage
 Hallo, ik ben Matheus Reis Martins, werktuigbouwkundig ingenieur, Corporate Controller of Finance bij Cargill Agrícola, en vader van Dante en Dio.
 Momenteel ben ik verantwoordelijk voor controle, budgettering, prognoses en kostenbeheer voor 4 havens in Brazilië en diverse diensten (zoals het structureren en beheren van dashboards) op Latijns-Amerikaans niveau.
 
-### EN-US:
+### JP-JP:
 こんにちは、私はマテウス・レイス・マルティンスです。機械工学のエンジニアで、カーギル・アグリコラでの財務コントローラー、そしてダンテとディオの父です。
 現在、私はブラジルの4つの港の管理、予算編成、予測およびコスト管理、およびラテンアメリカレベルでの様々なサービス（ダッシュボードの構築と管理など）を担当しています。
 
 ## Minhas habilidades
 
-# Project and Portifolio Management
-# Microsoft Power Bi, Apps and Automate
-# Python
-# Microsoft Azure
-# MySQL
-# Microsoft 365 + VBA Coding
-# LEAN SS, 5S, Belt Projects and its many tools
+#Project and Portifolio Management
+#Microsoft Power Bi, Apps and Automate
+#Python
+#Microsoft Azure
+#MySQL
+#Microsoft 365 + VBA Coding
+#LEAN SS, 5S, Belt Projects and its many tools
 
 ## Contate-me
 
