@@ -1,11 +1,13 @@
+# import this
+
 import datetime
 import textwrap
 
-# funcao MENU
+# MENU Function
 
 
 def menu():
-    # Exibe as opções para escolha
+    # Define options for the bank operations menu
     menu = """
     O que deseja fazer?
     [d] Depósito
