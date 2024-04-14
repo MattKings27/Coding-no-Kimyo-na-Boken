@@ -1,0 +1,15 @@
+# import this
+# Criar uma Lista 'itens' para armazenar os equipamentos:
+itens = []
+
+# Criar um loop para solicita os itens ao usuário:
+for item in range(3):
+# Solicitar o item e armazena na variável "item":
+  item = input('')
+# Adicionar o item à lista "itens":
+  itens.append(item)
+# Exibir a lista de itens
+print("Lista de Equipamentos:")  
+    # Loop que percorre cada item na lista "itens"
+for item in itens:
+    print(f"- {item}")
