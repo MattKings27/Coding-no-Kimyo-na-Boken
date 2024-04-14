@@ -1,7 +1,7 @@
 # You expected a title but it was me DIO!
 
 ### PT-BR:
-Olá, sou Matheus Reis Martins, Engenheiro Mecânico, Controlador Corporativo de Finanças pela Cargill Agrícola e pai do Dante e do Dio.
+Olá, sou *Matheus Reis Martins*, Engenheiro Mecânico, Controlador Corporativo de Finanças pela Cargill Agrícola e pai do Dante e do Dio.
 Atualmente sou responsável pelo controle, orçamento, previsão e gerenciamento de custos para 4 portos do Brasil e diversos serviços (como estruturação e gerenciamento de Dashboards) à nível América Latina.
 
 ### EN-US:
