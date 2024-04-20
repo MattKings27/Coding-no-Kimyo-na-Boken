@@ -1,0 +1,192 @@
+import datetime
+
+# Cores para o Terminal ---------------------------------
+RED = "\033[91m"
+BLUE = "\033[94m"
+GREEN = "\033[92m"
+ENDC = "\033[0m"
+
+# Variável global para armazenar o último número de conta utilizado
+ultimo_numero_conta = 0
+
+# Menu --------------------------------------------------
+menu = """
+{green}================ MENU ================{end}
+{blue}\t[cc]\t Cadastro de Cliente{end}
+{blue}\t[ac]\t Abertura de Conta{end}
+{blue}\t[lc]\t Abertura de Conta{end}
+{blue}\t[d]\t Deposito{end}
+{blue}\t[e]\t Extrato{end}
+{blue}\t[s]\t Saque{end}
+{red}\t[0]\t Sair{end}
+{green}======================================{end}
+
+=> """.format(blue=BLUE, red=RED, green=GREEN, end=ENDC)
+
+# Deposito -----------------------------------------------
+def depositar(saldo, valor, extrato):
+  if valor > 0:
+    saldo += valor
+    data_transacao = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    transacao = {'data': data_transacao, 'descricao': 'Deposito', 'valor': valor}
+    extrato.append(transacao)
+  else:
+    print("Operação falhou! O valor informado é inválido.")
+  return saldo
+
+# Saque --------------------------------------------------
+def sacar(*, saldo, valor, extrato, limite, numero_saques, LIMITE_SAQUES):
+  excedeu_saldo = valor > saldo
+  excedeu_limite = valor > limite
+  excedeu_saques = numero_saques >= LIMITE_SAQUES
+
+  if excedeu_saldo:
+    print("Operação falhou! Saldo suficiente.")
+  elif excedeu_limite:
+    print("Operação falhou! Excedeu o limite.")
+  elif excedeu_saques:
+    print("Operação falhou! Excedeu o limite diário de saque.")
+  elif valor > 0:
+    saldo -= valor
+    data_transacao = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    transacao = {"data": data_transacao, "descricao": "Saque", "valor": valor}
+    extrato.append(transacao)
+    numero_saques += 1
+    print('Aguarde a saída das notas. Saque efetuado com sucesso!')
+  else:
+    print("O valor informado é inválido! Tente novamente.")
+  return saldo, extrato
+
+# Extrato ------------------------------------------------
+def exibir_extrato(saldo, /, *, extrato):
+  print("\n================ EXTRATO ================")
+  if not extrato:
+    print("Não foram realizadas movimentações.")
+  else:
+    for transacao in extrato:
+      data = transacao["data"]
+      descricao = transacao["descricao"]
+      valor = transacao["valor"]
+
+      if descricao == "Deposito":
+        cor_descricao = BLUE
+      elif descricao == "Saque":
+        cor_descricao = RED
+      else:
+        cor_descricao = ENDC
+      print(f"{data} - {cor_descricao}{descricao}{ENDC}: R$ {valor:.2f}\t ")
+
+  print(f"\nSaldo: {BLUE}R$ {saldo:.2f}{ENDC}")
+  print("==========================================")
+
+# Cadastro de Clientes -----------------------------------
+def cadastrar_cliente(clientes):
+  while True:
+    cpf = input('Informe o CPF. Apenas números: ')
+    if cpf.isdigit() and cpf != "":
+      for cliente in clientes:
+        if cliente.get('cpf') == cpf:
+          print('Cliente já cadastrado com o CPF informado!')
+          return
+      break
+    else:
+      print('Entrada inválida! Digite apenas números e não deixe o campo vazio.')
+
+  nome = input('Informe o nome completo: ')
+  data_nascimento = input('Informe a data de nascimento (DD/MM/AAAA): ')
+  endereco = input('Informe o endereço completo -> "Logradouro - nº - bairro - cidade/sigla do estado":\n')
+
+  clientes.append({'nome': nome, 'cpf': cpf, 'data_nascimento': data_nascimento, 'endereco': endereco})
+  print('Cadastro do Cliente Efetuado com Sucesso!')
+
+# Abertura de Conta --------------------------------------
+def abrir_conta(agencia, numero_contas, clientes):
+# Utilizando a variável global
+  global ultimo_numero_conta  
+# Incrementa o último número de conta utilizado
+  ultimo_numero_conta += 1  
+# Formata o número da conta com zeros à esquerda
+  numero_conta = str(ultimo_numero_conta).zfill(4)  
+
+  for conta_existente in numero_contas:
+    if conta_existente['agencia'] == agencia and conta_existente['numero_conta'] == numero_conta:
+      print('A conta já existe!')
+      return
+
+  cliente_cpf = input('Informe o CPF do cliente para associar à conta: ')
+  cliente_encontrado = False
+
+  for cliente in clientes:
+    if cliente['cpf'] == cliente_cpf:
+      cliente_encontrado = True
+      break
+
+  if cliente_encontrado:
+    nova_conta = {'agencia': agencia, 'numero_conta': numero_conta, 'cliente_cpf': cliente_cpf}
+    numero_contas.append(nova_conta)
+    print('Abertura de conta efetuada com sucesso!')
+
+  else:
+    print('Cliente não encontrado!')
+# Dados do Cliente ---------------------------------------     
+def listar_clientes(numero_contas, clientes):
+  print("\n====================== LISTA DE CLIENTES ======================")
+  for conta in numero_contas:
+    agencia = conta['agencia']
+    numero_conta = conta['numero_conta']
+    cliente_cpf = conta['cliente_cpf']
+    for cliente in clientes:
+      if cliente['cpf'] == cliente_cpf:
+        nome_cliente = cliente['nome']
+        break
+    print(f"Agência: {agencia}\tConta: {numero_conta}\tNome: {nome_cliente}")
+  print("===============================================================")
+# main()--------------------------------------------------
+def main():
+  saldo = 0
+  extrato = []
+  limite = 500
+  numero_saques = 0
+  numero_contas = []
+  LIMITE_SAQUES = 3
+  AGENCIA = '0001'
+  clientes = []
+
+  # Declaração das Funções------------------------------
+  while True:
+    opcao = input(menu)
+
+    if opcao == 'd':
+      valor = float(input('Informe o valor do depósito: R$ '))
+      saldo = depositar(saldo, valor, extrato)
+
+    elif opcao == 's':
+      valor = float(input("Informe o valor do saque: R$ "))
+      saldo, extrato = sacar(
+        saldo=saldo,
+        valor=valor,
+        extrato=extrato,
+        limite=limite,
+        numero_saques=numero_saques,
+        LIMITE_SAQUES=LIMITE_SAQUES
+      )
+
+    elif opcao == 'e':
+      exibir_extrato(saldo, extrato=extrato)
+
+    elif opcao == 'cc':
+      cadastrar_cliente(clientes)
+
+    elif opcao == 'ac':
+      abrir_conta(AGENCIA, numero_contas, clientes)
+     
+    elif opcao == 'lc':
+      listar_clientes(numero_contas, clientes)
+
+    # Sair -------------------------------------------
+    elif opcao == "0":
+      break
+
+    else:
+      print("Operação inválida, por favor selecione novamente a operação desejada.")
+main()
